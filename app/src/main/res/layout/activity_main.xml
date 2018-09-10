@@ -8,52 +8,53 @@
     tools:layout_editor_absoluteY="81dp">
 
     <ScrollView
+        android:id="@+id/scv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvHello"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="40dp"
                     android:lineSpacingExtra="6sp"
                     android:text="김미소님\n안녕하세요."
                     android:textColor="#000000"
                     android:textSize="24sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginStart="25dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <view
                     android:id="@+id/vSearch"
                     class="android.support.constraint.ConstraintLayout"
                     id="@+id/view"
-                    android:background="#0c000000"
                     android:layout_width="310dp"
                     android:layout_height="44dp"
-                    android:layout_marginTop="128dp"
                     android:layout_marginStart="25dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:layout_marginTop="128dp"
+                    android:background="#0c000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imgSearch"
-                    android:src="@drawable/serach"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
-                    app:layout_constraintTop_toTopOf="@+id/vSearch"
-                    app:layout_constraintStart_toStartOf="@+id/vSearch" />
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/serach"
+                    app:layout_constraintStart_toStartOf="@+id/vSearch"
+                    app:layout_constraintTop_toTopOf="@+id/vSearch" />
 
                 <EditText
                     android:id="@+id/tSearch"
@@ -72,21 +73,45 @@
 
                 <ImageView
                     android:id="@+id/imgBarcode"
-                    android:src="@drawable/bacode"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    app:layout_constraintTop_toTopOf="@+id/vSearch"
-                    app:layout_constraintEnd_toEndOf="@+id/vSearch" />
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/bacode"
+                    app:layout_constraintEnd_toEndOf="@+id/vSearch"
+                    app:layout_constraintTop_toTopOf="@+id/vSearch" />
+
+                <TextView
+                    android:id="@+id/tvTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"
+                    android:lineSpacingExtra="15sp"
+                    android:text="전체"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vSearch" />
+
+                <ImageView
+                    android:id="@+id/imgArrowBottom"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/arrow_bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvTotal"
+                    app:layout_constraintTop_toBottomOf="@+id/vSearch" />
+
             </android.support.constraint.ConstraintLayout>
 
             <ListView
                 android:id="@+id/lvItems"
-                android:layout_width="344dp"
-                android:layout_height="379dp"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="180dp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
