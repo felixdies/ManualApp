@@ -11,10 +11,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.View.MeasureSpec
-import android.opengl.ETC1.getWidth
 import android.widget.ListView
-
-
 
 class MainActivity : Activity() {
     var userItems = ArrayList<Item>()
@@ -29,10 +26,10 @@ class MainActivity : Activity() {
             return@setOnTouchListener false
         }
 
-        addItemList(Item("삼성 블루스카이\n공기청정기", "item1.png", 326, 365))
-        addItemList(Item("다이슨 V10\n앱솔루트 플러스", "item2.png", 26, 180))
-        addItemList(Item("필립스 소닉케어\nHX6711", "item3.png", 143, 180))
-        addItemList(Item("삼성 레이저프린터\nSL-M2027", "item4.png", 200, 365))
+        addItemList(Item("다이슨 V10\n앱솔루트 플러스", R.drawable.item1, 26, 180))
+        addItemList(Item("삼성 블루스카이\n공기청정기", R.drawable.item2, 326, 365))
+        addItemList(Item("필립스 소닉케어\nHX6711", R.drawable.item3, 143, 180))
+        addItemList(Item("삼성 레이저프린터\nSL-M2027", R.drawable.item4, 200, 365))
 
         /*
         lvNotes.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
@@ -66,6 +63,7 @@ class MainActivity : Activity() {
                 vh = view.tag as ViewHolder
             }
 
+            vh.imgItem.setImageResource(items[position].img)
             vh.tvItemName.text = items[position].name
             vh.tvRemain.text = "-" + items[position].remain.toString() + "일"
 
@@ -119,5 +117,5 @@ class MainActivity : Activity() {
         listView.setLayoutParams(params)
     }
 
-    class Item (val name: String, val img: String, val remain: Int, val total: Int)
+    class Item (val name: String, val img: Int, val remain: Int, val total: Int)
 }
