@@ -29,10 +29,15 @@ class MainActivity : Activity() {
             startActivity(intent)
         }
 
-        addItemList(Item("다이슨 V10\n앱솔루트 플러스", R.drawable.item1, 26, 180))
-        addItemList(Item("삼성 블루스카이\n공기청정기", R.drawable.item2, 326, 365))
-        addItemList(Item("필립스 소닉케어\nHX6711", R.drawable.item3, 143, 180))
+        tvHello.setOnClickListener {
+            addItemList(Item("다이슨 V10\n앱솔루트 플러스", R.drawable.item1, 26, 180))
+        }
+
+        // 역순으로 추가됨
         addItemList(Item("삼성 레이저프린터\nSL-M2027", R.drawable.item4, 200, 365))
+        addItemList(Item("필립스 소닉케어\nHX6711", R.drawable.item3, 143, 180))
+        addItemList(Item("삼성 블루스카이\n공기청정기", R.drawable.item2, 326, 365))
+        addItemList(Item("다이슨 V10\n앱솔루트 플러스", R.drawable.item1, 26, 180))
 
         /*
         lvNotes.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
@@ -42,7 +47,10 @@ class MainActivity : Activity() {
     }
 
     fun addItemList(item: Item) {
-        userItems.add(item)
+        val newItemList = ArrayList<Item>()
+        newItemList.add(item)
+        newItemList.addAll(userItems)
+        userItems = newItemList
         var itemsAdapter = ItemsAdapter(this, userItems)
         lvItems.adapter = itemsAdapter
         setListViewHeightBasedOnChildren(lvItems)
