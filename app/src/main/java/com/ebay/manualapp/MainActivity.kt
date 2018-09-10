@@ -2,16 +2,14 @@ package com.ebay.manualapp
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.BaseAdapter
-import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.View.MeasureSpec
-import android.widget.ListView
+import android.widget.*
 
 class MainActivity : Activity() {
     var userItems = ArrayList<Item>()
@@ -24,6 +22,11 @@ class MainActivity : Activity() {
         lvItems.setOnTouchListener { v, event ->
             v.parent.requestDisallowInterceptTouchEvent(false)
             return@setOnTouchListener false
+        }
+
+        tvSearch.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
         }
 
         addItemList(Item("다이슨 V10\n앱솔루트 플러스", R.drawable.item1, 26, 180))
