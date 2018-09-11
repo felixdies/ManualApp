@@ -51,4 +51,14 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivPdf"
+        android:layout_width="38dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="245dp"
+        android:layout_marginTop="113dp"
+        app:srcCompat="@drawable/pdficon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -81,9 +81,13 @@ class MainActivity : Activity() {
             vh.tvItemName.text = items[position].name
             vh.tvRemain.text = "-" + items[position].remain.toString() + "일"
 
-            vh.tvItemName.setOnClickListener {
+            vh.imgItem.setOnClickListener {
                 val intent = Intent(ctx, DetailActivity::class.java)
                 startActivity(intent)
+            }
+
+            vh.ivPdf.setOnClickListener {
+                Log.i("shin", "PDF")
             }
 
             return view
@@ -98,11 +102,15 @@ class MainActivity : Activity() {
         val imgItem: ImageView
         val tvItemName: TextView
         val tvRemain: TextView
+        val ivPdf: ImageView
 
         init {
             this.imgItem = view?.findViewById(R.id.imgItem) as ImageView
             this.tvItemName= view?.findViewById(R.id.tvItemName) as TextView
             this.tvRemain= view?.findViewById(R.id.tvRemain) as TextView
+            this.ivPdf = view?.findViewById(R.id.ivPdf) as ImageView
+
+            ivPdf.setImageResource(R.drawable.pdficon)
         }
     }
 

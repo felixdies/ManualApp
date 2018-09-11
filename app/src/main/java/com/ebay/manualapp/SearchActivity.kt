@@ -34,11 +34,7 @@ class SearchActivity : Activity() {
             return@listFiles false
         }
 
-        java.awt.Point()
-
-        //Log.i("shin", Environment.getExternalStjorageDirectory())
         manualInfo.init(dirPath.absolutePath)
-
 
         val matchResults = manualInfo.getMatchResult(arrayOf("이상한", "냄새"), 3)
         for (result in matchResults) {
