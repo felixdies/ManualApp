@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -14,6 +15,9 @@ import com.ebaykorea.hackathon.extractor.TextExtractor
 import com.ebaykorea.hackathon.finder.IterateFinder
 import com.ebaykorea.hackathon.result.ManualInfo
 import kotlinx.android.synthetic.main.activity_search.*
+import java.io.File
+import java.io.FileWriter
+import java.io.IOException
 
 class SearchActivity : Activity() {
     var searchItems = ArrayList<SearchItem>()
@@ -23,6 +27,32 @@ class SearchActivity : Activity() {
         setContentView(R.layout.activity_search)
 
         val manualInfo = ManualInfo(TextExtractor(), IterateFinder())
+
+        val dirPath = File(Environment.getExternalStorageDirectory().toString() + "/Manuals")
+        dirPath.listFiles { f ->
+            Log.i("shin", f.absolutePath)
+            return@listFiles false
+        }
+        Environment.getExternalStorageDirectory().listFiles { f ->
+            Log.i("shin", f.absolutePath)
+            return@listFiles false
+        }
+
+        Log.i("shin", Environment.getExternalStorageState())
+        if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
+            val file = File(Environment.getExternalStorageDirectory(), "manualfiletest.txt")
+            Log.i("shin", file.absolutePath)
+            try {
+                val fw = FileWriter(file, false)
+                fw.write("test")
+                fw.close()
+                Log.i("shin", "write manualfiletest.txt")
+            } catch (e: IOException) {
+                Log.d("shin", e.stackTrace.toString())
+            }
+        }
+
+        //Log.i("shin", Environment.getExternalStorageDirectory())
         manualInfo.init(Uri.parse("android.resource://com.ebay.manualapp/").toString())
 
         val matchResults = manualInfo.getMatchResult(arrayOf("이상한", "냄새"), 3)
