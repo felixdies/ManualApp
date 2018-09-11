@@ -87,7 +87,8 @@ class MainActivity : Activity() {
             }
 
             vh.ivPdf.setOnClickListener {
-                Log.i("shin", "PDF")
+                val intent = Intent(ctx, PDFActivity::class.java)
+                startActivity(intent)
             }
 
             return view
