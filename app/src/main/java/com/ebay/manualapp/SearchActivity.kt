@@ -2,6 +2,7 @@ package com.ebay.manualapp
 
 import android.app.Activity
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,8 +10,10 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.ebaykorea.hackathon.extractor.TextExtractor
+import com.ebaykorea.hackathon.finder.IterateFinder
+import com.ebaykorea.hackathon.result.ManualInfo
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.list_searchitem.view.*
 
 class SearchActivity : Activity() {
     var searchItems = ArrayList<SearchItem>()
@@ -19,21 +22,21 @@ class SearchActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        val manualInfo = ManualInfo(TextExtractor(), IterateFinder())
+        manualInfo.init(Uri.parse("android.resource://com.ebay.manualapp/").toString())
+
+        val matchResults = manualInfo.getMatchResult(arrayOf("이상한", "냄새"), 3)
+        for (result in matchResults) {
+            val texts = ArrayList<SearchItemText>()
+            for (line in result.matchLines) {
+                texts.add(SearchItemText(line.line, line.page))
+                texts.add(SearchItemText(line.line, line.page))
+                texts.add(SearchItemText(line.line, line.page))
+            }
+            addSearchResult(SearchItem(result.itemName, texts))
+        }
+
         etSearch.afterTextChanged {  }
-
-        val texts1 = ArrayList<SearchItemText>()
-        texts1.add(SearchItemText("이상한 냄새가 나요", 1))
-        texts1.add(SearchItemText("필터오염이 심하거나 냄새날 경우", 2))
-        texts1.add(SearchItemText("세균을 제거하고 냄새를 방지하는 기능", 3))
-        val item1 = SearchItem("삼성 블루스카이 공기청정기", texts1)
-        addSearchResult(item1)
-
-        val texts2 = ArrayList<SearchItemText>()
-        texts2.add(SearchItemText("구입 초기에는 약간의 새필터 냄새", 1))
-        texts2.add(SearchItemText("냄새가 날 경우 일체형", 2))
-        texts2.add(SearchItemText("세균을 제거하고 냄새를 방지하는 기능", 3))
-        val item2 = SearchItem("위닉스뽀송 제습기", texts2)
-        addSearchResult(item2)
     }
 
     fun addSearchResult(item: SearchItem) {
