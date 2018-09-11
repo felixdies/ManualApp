@@ -16,6 +16,8 @@ class SMSReceiver : BroadcastReceiver() {
             val smsMessage = Telephony.Sms.Intents.getMessagesFromIntent(intent)[0]
             val message = smsMessage.messageBody.toString()
             Log.d(TAG, "SMS Message: $message")
+
+            ObservableObject.instance.updateValue(message)
         }
     }
 }

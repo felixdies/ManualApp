@@ -10,13 +10,19 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.View.MeasureSpec
 import android.widget.*
+import java.util.*
+import android.widget.Toast
 
-class MainActivity : Activity() {
+
+
+class MainActivity : Activity(), Observer {
     var userItems = ArrayList<Item>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        ObservableObject.instance.addObserver(this)
 
         // ListView 가 ScrollView 와 함께 Scroll 되도록 함
         lvItems.setOnTouchListener { v, event ->
@@ -44,6 +50,13 @@ class MainActivity : Activity() {
             Toast.makeText(this, "Click on " + listNotes[position].title, Toast.LENGTH_SHORT).show()
         }
         */
+    }
+
+    override fun update(observable: Observable, data: Any) {
+        Log.i("SMSReceiver", "MainActivity get - " + data.toString())
+        if(data.toString().indexOf("위닉스") >= 0) {
+            addItemList(Item("위닉스 공기청정기\n앱솔루트 플러스", "위닉스_공기청정기_WACU150", "B470817114", "B402730548", "B531060785", R.drawable.item1, 26, 180))
+        }
     }
 
     fun addItemList(item: Item) {
