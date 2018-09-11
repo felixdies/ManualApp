@@ -19,8 +19,8 @@ class PDFActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pdf)
 
-        var pdfName = "삼성_빌트인_냉장고"
-        var pdfPage = 3
+        var pdfName = intent.getStringExtra("pdfName")
+        var pdfPage = intent.getIntExtra("pdfPage", 0)
         curPage = pdfPage
         pdfPath = Environment.getExternalStorageDirectory().toString() + "/Manuals/" + pdfName + ".pdf"
 
@@ -48,7 +48,7 @@ class PDFActivity : Activity() {
 
         val pageCount = pdfRenderer.pageCount
         Toast.makeText(this,
-                "" + page + "/" + pageCount,
+                "" + (page + 1) + "/" + pageCount,
                 Toast.LENGTH_LONG).show()
 
         //Display page 0

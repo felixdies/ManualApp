@@ -33,14 +33,14 @@ class MainActivity : Activity() {
         }
 
         tvHello.setOnClickListener {
-            addItemList(Item("다이슨 V10\n앱솔루트 플러스", R.drawable.item1, 26, 180))
+            addItemList(Item("위닉스 공기청정기\n앱솔루트 플러스", "위닉스_공기청정기_WACU150", R.drawable.item1, 26, 180))
         }
 
         // 역순으로 추가됨
-        addItemList(Item("삼성 레이저프린터\nSL-M2027", R.drawable.item4, 200, 365))
-        addItemList(Item("필립스 소닉케어\nHX6711", R.drawable.item3, 143, 180))
-        addItemList(Item("삼성 블루스카이\n공기청정기", R.drawable.item2, 326, 365))
-        addItemList(Item("다이슨 V10\n앱솔루트 플러스", R.drawable.item1, 26, 180))
+        addItemList(Item("삼성 레이저프린터\nSL-M2027", "삼성_프린터_c430", R.drawable.item4, 200, 365))
+        addItemList(Item("삼성 빌트인 냉장고\nHX6711", "삼성_빌트인_냉장고", R.drawable.item3, 143, 180))
+        addItemList(Item("삼성 블루스카이\n공기청정기", "삼성_자연가습청정기_AX40M6580DMD", R.drawable.item2, 326, 365))
+        addItemList(Item("위닉스 공기청정기\n앱솔루트 플러스", "위닉스_공기청정기_WACU150", R.drawable.item1, 26, 180))
 
         /*
         lvNotes.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
@@ -80,16 +80,9 @@ class MainActivity : Activity() {
             vh.imgItem.setImageResource(items[position].img)
             vh.tvItemName.text = items[position].name
             vh.tvRemain.text = "-" + items[position].remain.toString() + "일"
+            vh.pdfName = items[position].pdfName
 
-            vh.imgItem.setOnClickListener {
-                val intent = Intent(ctx, DetailActivity::class.java)
-                startActivity(intent)
-            }
-
-            vh.ivPdf.setOnClickListener {
-                val intent = Intent(ctx, PDFActivity::class.java)
-                startActivity(intent)
-            }
+            vh.setListeners(ctx)
 
             return view
         }
@@ -104,6 +97,7 @@ class MainActivity : Activity() {
         val tvItemName: TextView
         val tvRemain: TextView
         val ivPdf: ImageView
+        var pdfName = ""
 
         init {
             this.imgItem = view?.findViewById(R.id.imgItem) as ImageView
@@ -112,6 +106,20 @@ class MainActivity : Activity() {
             this.ivPdf = view?.findViewById(R.id.ivPdf) as ImageView
 
             ivPdf.setImageResource(R.drawable.pdficon)
+        }
+
+        fun setListeners(context: Context) {
+            imgItem.setOnClickListener {
+                val intent = Intent(context, DetailActivity::class.java)
+                context.startActivity(intent)
+            }
+
+            ivPdf.setOnClickListener {
+                val intent = Intent(context, PDFActivity::class.java)
+                intent.putExtra("pdfName", pdfName)
+                intent.putExtra("pdfPage", 0)
+                context.startActivity(intent)
+            }
         }
     }
 
@@ -137,5 +145,5 @@ class MainActivity : Activity() {
         listView.setLayoutParams(params)
     }
 
-    inner class Item (val name: String, val img: Int, val remain: Int, val total: Int)
+    inner class Item (val name: String, val pdfName: String, val img: Int, val remain: Int, val total: Int)
 }
