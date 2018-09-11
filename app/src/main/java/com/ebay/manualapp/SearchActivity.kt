@@ -33,27 +33,12 @@ class SearchActivity : Activity() {
             Log.i("shin", f.absolutePath)
             return@listFiles false
         }
-        Environment.getExternalStorageDirectory().listFiles { f ->
-            Log.i("shin", f.absolutePath)
-            return@listFiles false
-        }
 
-        Log.i("shin", Environment.getExternalStorageState())
-        if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-            val file = File(Environment.getExternalStorageDirectory(), "manualfiletest.txt")
-            Log.i("shin", file.absolutePath)
-            try {
-                val fw = FileWriter(file, false)
-                fw.write("test")
-                fw.close()
-                Log.i("shin", "write manualfiletest.txt")
-            } catch (e: IOException) {
-                Log.d("shin", e.stackTrace.toString())
-            }
-        }
+        java.awt.Point()
 
-        //Log.i("shin", Environment.getExternalStorageDirectory())
-        manualInfo.init(Uri.parse("android.resource://com.ebay.manualapp/").toString())
+        //Log.i("shin", Environment.getExternalStjorageDirectory())
+        manualInfo.init(dirPath.absolutePath)
+
 
         val matchResults = manualInfo.getMatchResult(arrayOf("이상한", "냄새"), 3)
         for (result in matchResults) {
