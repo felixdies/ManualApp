@@ -10,9 +10,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.View.MeasureSpec
 import android.widget.*
-import com.ebaykorea.hackathon.finder.IterateFinder
-import com.ebaykorea.hackathon.extractor.TextExtractor
-import com.ebaykorea.hackathon.result.ManualInfo
 
 class MainActivity : Activity() {
     var userItems = ArrayList<Item>()
