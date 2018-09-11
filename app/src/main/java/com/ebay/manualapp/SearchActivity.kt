@@ -25,7 +25,7 @@ class SearchActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        val dirPath = File(Environment.getExternalStorageDirectory().toString() + "/Manuals")
+        val dirPath = File(Environment.getExternalStorageDirectory().toString() + "/Manuals/info")
         dirPath.listFiles { f ->
             Log.i("shin", f.absolutePath)
             return@listFiles false
@@ -35,14 +35,12 @@ class SearchActivity : Activity() {
         manualInfo.init(dirPath.absolutePath)
 
         val matchResults = manualInfo.getMatchResult(arrayOf("이상한", "냄새"), 3)
-        Log.i("shin", matchResults.size.toString())
+        Log.i("shin", "result size = " + matchResults.size.toString())
 
         for (result in matchResults) {
-
+            Log.i("shin", "\n<<< result >>>\nitemName:" + result.itemName + "\nline count:" + result.matchLines.size.toString())
             val texts = ArrayList<SearchItemText>()
             for (line in result.matchLines) {
-                texts.add(SearchItemText(line.line, line.page))
-                texts.add(SearchItemText(line.line, line.page))
                 texts.add(SearchItemText(line.line, line.page))
             }
             addSearchResult(SearchItem(result.itemName, texts))
