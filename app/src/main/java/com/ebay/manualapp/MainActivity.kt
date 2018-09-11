@@ -81,17 +81,9 @@ class MainActivity : Activity() {
             return view
         }
 
-        override fun getItem(position: Int): Any {
-            return items[position]
-        }
-
-        override fun getItemId(position: Int): Long {
-            return position.toLong()
-        }
-
-        override fun getCount(): Int {
-            return items.size
-        }
+        override fun getItem(position: Int): Any = items[position]
+        override fun getItemId(position: Int): Long = position.toLong()
+        override fun getCount(): Int = items.size
     }
 
     private class ViewHolder(view: View?) {
@@ -128,5 +120,5 @@ class MainActivity : Activity() {
         listView.setLayoutParams(params)
     }
 
-    class Item (val name: String, val img: Int, val remain: Int, val total: Int)
+    inner class Item (val name: String, val img: Int, val remain: Int, val total: Int)
 }
