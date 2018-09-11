@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -22,6 +23,13 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".PDFActivity"></activity>
+
+        <receiver android:name=".SMSReceiver">
+            <intent-filter >
+                <!-- 문자를 받아올 수 있게 intent-filter 추가 -->
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
