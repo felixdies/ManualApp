@@ -78,6 +78,11 @@ class MainActivity : Activity() {
             vh.tvItemName.text = items[position].name
             vh.tvRemain.text = "-" + items[position].remain.toString() + "일"
 
+            vh.tvItemName.setOnClickListener {
+                val intent = Intent(ctx, DetailActivity::class.java)
+                startActivity(intent)
+            }
+
             return view
         }
 
