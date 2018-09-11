@@ -2,7 +2,6 @@ package com.ebay.manualapp
 
 import android.app.Activity
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.text.Editable
@@ -11,13 +10,13 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.ebaykorea.hackathon.extractor.TextExtractor
-import com.ebaykorea.hackathon.finder.IterateFinder
-import com.ebaykorea.hackathon.result.ManualInfo
 import kotlinx.android.synthetic.main.activity_search.*
 import java.io.File
-import java.io.FileWriter
-import java.io.IOException
+import com.ebaykorea.hackathon.finder.IterateFinder
+import com.ebaykorea.hackathon.finder.MatchLine
+import com.ebaykorea.hackathon.reader.InfoReader
+import com.ebaykorea.hackathon.result.ManualInfo
+import com.ebaykorea.hackathon.result.ManualMatchResult
 
 class SearchActivity : Activity() {
     var searchItems = ArrayList<SearchItem>()
@@ -26,18 +25,20 @@ class SearchActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        val manualInfo = ManualInfo(TextExtractor(), IterateFinder())
-
         val dirPath = File(Environment.getExternalStorageDirectory().toString() + "/Manuals")
         dirPath.listFiles { f ->
             Log.i("shin", f.absolutePath)
             return@listFiles false
         }
 
+        val manualInfo = ManualInfo(InfoReader(), IterateFinder())
         manualInfo.init(dirPath.absolutePath)
 
         val matchResults = manualInfo.getMatchResult(arrayOf("이상한", "냄새"), 3)
+        Log.i("shin", matchResults.size.toString())
+
         for (result in matchResults) {
+
             val texts = ArrayList<SearchItemText>()
             for (line in result.matchLines) {
                 texts.add(SearchItemText(line.line, line.page))
