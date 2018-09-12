@@ -19,7 +19,9 @@ import com.ebaykorea.hackathon.result.ManualInfo
 import com.ebaykorea.hackathon.result.ManualMatchResult
 
 class SearchActivity : Activity() {
-    var searchItems = ArrayList<SearchItem>()
+    val manualInfo = ManualInfo(InfoReader(), IterateFinder())
+    val searchItems = ArrayList<SearchItem>()
+    val searchAdapter = ItemsAdapter(this, searchItems)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,29 +33,33 @@ class SearchActivity : Activity() {
             return@listFiles false
         }
 
-        val manualInfo = ManualInfo(InfoReader(), IterateFinder())
         manualInfo.init(dirPath.absolutePath)
 
-        val matchResults = manualInfo.getMatchResult(arrayOf("이상한", "냄새"), 3)
-        Log.i("shin", "result size = " + matchResults.size.toString())
+        lvSearchItems.adapter = ItemsAdapter(this, searchItems)
 
-        for (result in matchResults) {
-            Log.i("shin", "\n<<< result >>>\nitemName:" + result.itemName + "\nline count:" + result.matchLines.size.toString())
-            val texts = ArrayList<SearchItemText>()
-            for (line in result.matchLines) {
-                texts.add(SearchItemText(line.line, line.page))
+        etSearch.afterTextChanged {
+            Log.i("shin", etSearch.text.toString())
+
+            val searchTextArray = etSearch.text.toString().split(" ").toTypedArray()
+            val matchResults = manualInfo.getMatchResult(searchTextArray, 3)
+            Log.i("shin", "searchTextArray = $searchTextArray")
+            Log.i("shin", "result size = " + matchResults.size.toString())
+
+            searchItems.clear()
+
+            for (result in matchResults) {
+                Log.i("shin", "\n<<< result >>>\nitemName:" + result.itemName + "\nline count:" + result.matchLines.size.toString())
+                val texts = ArrayList<SearchItemText>()
+                for (line in result.matchLines) {
+                    texts.add(SearchItemText(line.line, line.page))
+                }
+                if (texts.size > 0) {
+                    searchItems.add(SearchItem(result.itemName, texts))
+                }
             }
-            addSearchResult(SearchItem(result.itemName, texts))
+
+            searchAdapter.notifyDataSetChanged()
         }
-
-        etSearch.afterTextChanged {  }
-    }
-
-    fun addSearchResult(item: SearchItem) {
-        searchItems.add(item)
-        var itemsAdapter = ItemsAdapter(this, searchItems)
-        lvSearchItems.adapter = itemsAdapter
-        setListViewHeightBasedOnChildren(lvSearchItems)
     }
 
     inner class ItemsAdapter(context: Context, itemList: ArrayList<SearchItem>): BaseAdapter() {
@@ -76,9 +82,9 @@ class SearchActivity : Activity() {
             vh.itemName.text = items[position].itemName
             vh.text1.text = items[position].texts[0].itemName
             if(items[position].texts.size >= 2) vh.text2.text = items[position].texts[1].itemName
-            else vh.text2.height = 0
+            else vh.text2.visibility = View.GONE
             if(items[position].texts.size >= 3) vh.text3.text = items[position].texts[2].itemName
-            else vh.text3.height = 0
+            else vh.text3.visibility = View.GONE
 
             return view
         }
@@ -104,38 +110,12 @@ class SearchActivity : Activity() {
 
     fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
             override fun afterTextChanged(editable: Editable?) {
                 afterTextChanged.invoke(editable.toString())
             }
         })
-    }
-
-    /**** Method for Setting the Height of the ListView dynamically.
-     * Hack to fix the issue of not showing all the items of the ListView
-     * when placed inside a ScrollView   */
-    fun setListViewHeightBasedOnChildren(listView: ListView) {
-        val listAdapter = listView.getAdapter() ?: return
-
-        val desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED)
-        var totalHeight = 0
-        var view: View? = null
-        for (i in 0 until listAdapter.getCount()) {
-            view = listAdapter.getView(i, view, listView)
-            if (i == 0)
-                view!!.layoutParams = ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
-
-            view!!.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
-            totalHeight += view.measuredHeight
-        }
-        val params = listView.getLayoutParams()
-        params.height = totalHeight + listView.getDividerHeight() * (listAdapter.getCount() - 1)
-        listView.setLayoutParams(params)
     }
 
     inner class SearchItem (val itemName: String, val texts: ArrayList<SearchItemText>)
