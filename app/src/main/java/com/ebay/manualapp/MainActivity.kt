@@ -44,11 +44,8 @@ class MainActivity : Activity(), Observer {
         addItemList(Item("삼성 빌트인 냉장고\nHX6711", "삼성 빌트인 냉장고 HX6711", "", "", "", R.drawable.item3, 143, 1095))
         addItemList(Item("삼성 블루스카이\n공기청정기", "삼성 블루스카이 공기청정기", "gBBys6b", "gBM6NNs", "B531060785", R.drawable.item2, 326, 365))
 
-        /*
-        lvNotes.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
-            Toast.makeText(this, "Click on " + listNotes[position].title, Toast.LENGTH_SHORT).show()
-        }
-        */
+
+        tvTotal.text = "전체 " + userItems.size
     }
 
     override fun update(observable: Observable, data: Any) {
@@ -67,6 +64,7 @@ class MainActivity : Activity(), Observer {
         lvItems.adapter = itemsAdapter
         setListViewHeightBasedOnChildren(lvItems)
 
+        tvTotal.text = "전체 " + userItems.size
         return true
     }
 
