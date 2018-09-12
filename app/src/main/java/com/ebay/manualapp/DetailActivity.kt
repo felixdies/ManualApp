@@ -6,16 +6,18 @@ import android.graphics.*
 import android.net.Uri
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_detail.*
+import android.animation.ValueAnimator
+
+
 
 class DetailActivity : Activity() {
+    var bitmap = Bitmap.createBitmap(176, 176, Bitmap.Config.ARGB_8888)
+    var canvas = Canvas(bitmap)
+    var paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-
-        var bitmap = Bitmap.createBitmap(176, 176, Bitmap.Config.ARGB_8888)
-        var canvas = Canvas(bitmap)
-        var paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
         paint.color = Color.WHITE
         paint.style = Paint.Style.STROKE
@@ -37,6 +39,18 @@ class DetailActivity : Activity() {
         imgSup3.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, makeAuctionUri(intent.getStringExtra("sup3"))))
         }
+
+        val animator = ValueAnimator.ofInt(99, 12)
+        animator.duration = 1500
+        animator.addUpdateListener { animation ->
+            tvRemainPercent.text = animation.animatedValue.toString()
+            val ival = animation.animatedValue
+            if (ival is Int) {
+                bitmap.eraseColor(Color.TRANSPARENT)
+                canvas.drawArc(2f, 2f, 174f, 174f, -90f, 360f * (ival.toFloat() / 100f), false, paint)
+            }
+        }
+        animator.start()
     }
 
     fun makeAuctionUri(itemNo: String): Uri {
