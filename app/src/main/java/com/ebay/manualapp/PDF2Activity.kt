@@ -20,5 +20,7 @@ class PDF2Activity : Activity() {
 
         // /storage/emulated/0/Manuals
         pdfView.fromFile(File(pdfPath))
+                .defaultPage(pdfPage)
+                .load()
     }
 }
