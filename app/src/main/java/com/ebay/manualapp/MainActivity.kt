@@ -3,6 +3,10 @@ package com.ebay.manualapp
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -95,7 +99,33 @@ class MainActivity : Activity(), Observer {
 
             vh.setListeners(ctx)
 
+            drawArc(vh.imgRemain, items[position].supplyRemain)
+
             return view
+        }
+
+        fun drawArc(view: ImageView, supplyRemain: Float) {
+            var bitmap = Bitmap.createBitmap(105, 105, Bitmap.Config.ARGB_8888)
+            var canvas = Canvas(bitmap)
+            var paint = Paint()
+
+            paint.setARGB(0xff, 0xe9, 0xe9,0xe9)
+            paint.style = Paint.Style.STROKE
+            canvas.drawCircle(52.5f, 52.5f, 51.5f, paint)
+
+            if(supplyRemain < 0.25f) {
+                paint.setARGB(0xff, 0xfc, 0x3c,0x59)
+            }
+            else if(supplyRemain < 0.5f) {
+                paint.color = Color.YELLOW
+            }
+            else {
+                paint.color = Color.GREEN
+            }
+            paint.strokeWidth = 2f
+            canvas.drawArc(2f, 2f, 103f, 103f, -90f, 360f * supplyRemain, false, paint)
+
+            view.setImageBitmap(bitmap)
         }
 
         override fun getItem(position: Int): Any = items[position]
@@ -105,6 +135,7 @@ class MainActivity : Activity(), Observer {
 
     private class ViewHolder(view: View?) {
         val imgItem: ImageView
+        val imgRemain: ImageView
         val tvItemName: TextView
         val tvRemain: TextView
         val ivPdf: ImageView
@@ -115,6 +146,7 @@ class MainActivity : Activity(), Observer {
 
         init {
             this.imgItem = view?.findViewById(R.id.imgItem) as ImageView
+            this.imgRemain = view?.findViewById(R.id.imgRemain) as ImageView
             this.tvItemName= view?.findViewById(R.id.tvItemName) as TextView
             this.tvRemain= view?.findViewById(R.id.tvRemain) as TextView
             this.ivPdf = view?.findViewById(R.id.ivPdf) as ImageView

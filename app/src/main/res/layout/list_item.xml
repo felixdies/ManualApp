@@ -16,6 +16,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/item1" />
 
+    <ImageView
+        android:id="@+id/imgRemain"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvItemName"
         android:layout_width="wrap_content"
@@ -62,13 +71,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="105dp"
-        android:layout_height="105dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="#00ffffff" />
 </android.support.constraint.ConstraintLayout>
