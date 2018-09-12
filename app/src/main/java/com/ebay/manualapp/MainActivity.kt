@@ -164,7 +164,7 @@ class MainActivity : Activity(), Observer {
             }
 
             ivPdf.setOnClickListener {
-                val intent = Intent(context, PDFActivity::class.java)
+                val intent = Intent(context, PDF2Activity::class.java)
                 intent.putExtra("pdfName", pdfName)
                 intent.putExtra("pdfPage", 0)
                 context.startActivity(intent)
