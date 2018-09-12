@@ -35,13 +35,13 @@ class MainActivity : Activity(), Observer {
             startActivity(intent)
         }
 
-        tvHello.setOnClickListener {
-            //addItemList(Item("위닉스 공기청정기\n앱솔루트 플러스", "위닉스 공기청정기 WACU150", "B470817114", "B402730548", "B531060785", R.drawable.item1, 26, 180))
+        tvHello.setOnLongClickListener {
+            addItemList(Item("다이슨 V7 플러피\n무선청소기", "다이슨 V7 플러피 무선청소기", "", "", "", R.drawable.item1, 730, 730))
         }
 
         // 역순으로 추가됨
         addItemList(Item("삼성 레이저프린터\nSL-M2027", "삼성 레이저프린터 SL-M2027", "", "", "", R.drawable.item4, 200, 365))
-        addItemList(Item("삼성 빌트인 냉장고\nHX6711", "삼성 빌트인 냉장고 HX6711", "", "", "", R.drawable.item3, 143, 180))
+        addItemList(Item("삼성 빌트인 냉장고\nHX6711", "삼성 빌트인 냉장고 HX6711", "", "", "", R.drawable.item3, 143, 1095))
         addItemList(Item("삼성 블루스카이\n공기청정기", "삼성 블루스카이 공기청정기", "gBBys6b", "gBM6NNs", "B531060785", R.drawable.item2, 326, 365))
 
         /*
@@ -54,11 +54,11 @@ class MainActivity : Activity(), Observer {
     override fun update(observable: Observable, data: Any) {
         Log.i("SMSReceiver", "MainActivity get - " + data.toString())
         if(data.toString().indexOf("다이슨") >= 0) {
-            addItemList(Item("다이슨 V7 플러피\n무선청소기", "다이슨 V7 플러피 무선청소기", "", "", "", R.drawable.item1, 730, 180))
+            addItemList(Item("다이슨 V7 플러피\n무선청소기", "다이슨 V7 플러피 무선청소기", "", "", "", R.drawable.item1, 730, 730))
         }
     }
 
-    fun addItemList(item: Item) {
+    fun addItemList(item: Item): Boolean {
         val newItemList = ArrayList<Item>()
         newItemList.add(item)
         newItemList.addAll(userItems)
@@ -66,6 +66,8 @@ class MainActivity : Activity(), Observer {
         var itemsAdapter = ItemsAdapter(this, userItems)
         lvItems.adapter = itemsAdapter
         setListViewHeightBasedOnChildren(lvItems)
+
+        return true
     }
 
     inner class ItemsAdapter(context: Context, itemList: ArrayList<Item>): BaseAdapter() {
