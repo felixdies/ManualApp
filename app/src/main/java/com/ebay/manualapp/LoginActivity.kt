@@ -17,7 +17,7 @@ class LoginActivity : Activity() {
             loginBtn.visibility = View.INVISIBLE
             tvWating.visibility = View.VISIBLE
             loginBar.visibility = View.VISIBLE
-            Handler().postDelayed({ callback(1) }, 350)
+            Handler().postDelayed({ callback(1) }, 400)
         }
     }
 
