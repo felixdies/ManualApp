@@ -36,14 +36,14 @@ class MainActivity : Activity(), Observer {
         }
 
         tvHello.setOnClickListener {
-            addItemList(Item("위닉스 공기청정기\n앱솔루트 플러스", "위닉스_공기청정기_WACU150", "B470817114", "B402730548", "B531060785", R.drawable.item1, 26, 180))
+            addItemList(Item("위닉스 공기청정기\n앱솔루트 플러스", "위닉스 공기청정기 WACU150", "B470817114", "B402730548", "B531060785", R.drawable.item1, 26, 180))
         }
 
         // 역순으로 추가됨
-        addItemList(Item("삼성 레이저프린터\nSL-M2027", "삼성_프린터_c430", "B470817114", "B402730548", "B531060785", R.drawable.item4, 200, 365))
-        addItemList(Item("삼성 빌트인 냉장고\nHX6711", "삼성_빌트인_냉장고", "B470817114", "B402730548", "B531060785", R.drawable.item3, 143, 180))
-        addItemList(Item("삼성 블루스카이\n공기청정기", "삼성_자연가습청정기_AX40M6580DMD", "B470817114", "B402730548", "B531060785", R.drawable.item2, 326, 365))
-        addItemList(Item("위닉스 공기청정기\n앱솔루트 플러스", "위닉스_공기청정기_WACU150", "B470817114", "B402730548", "B531060785", R.drawable.item1, 26, 180))
+        addItemList(Item("삼성 레이저프린터\nSL-M2027", "삼성 프린터 c430", "B470817114", "B402730548", "B531060785", R.drawable.item4, 200, 365))
+        addItemList(Item("삼성 빌트인 냉장고\nHX6711", "삼성 빌트인 냉장고", "B470817114", "B402730548", "B531060785", R.drawable.item3, 143, 180))
+        addItemList(Item("삼성 블루스카이\n공기청정기", "삼성 자연가습청정기 AX40M6580DMD", "B470817114", "B402730548", "B531060785", R.drawable.item2, 326, 365))
+        addItemList(Item("위닉스 공기청정기\n앱솔루트 플러스", "위닉스 공기청정기 WACU150", "B470817114", "B402730548", "B531060785", R.drawable.item1, 26, 180))
 
         /*
         lvNotes.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->

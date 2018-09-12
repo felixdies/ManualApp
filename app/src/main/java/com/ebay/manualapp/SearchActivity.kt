@@ -2,6 +2,7 @@ package com.ebay.manualapp
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.text.Editable
@@ -35,7 +36,7 @@ class SearchActivity : Activity() {
 
         manualInfo.init(dirPath.absolutePath)
 
-        lvSearchItems.adapter = ItemsAdapter(this, searchItems)
+        lvSearchItems.adapter = searchAdapter
 
         etSearch.afterTextChanged {
             Log.i("shin", etSearch.text.toString())
@@ -51,7 +52,7 @@ class SearchActivity : Activity() {
                 Log.i("shin", "\n<<< result >>>\nitemName:" + result.itemName + "\nline count:" + result.matchLines.size.toString())
                 val texts = ArrayList<SearchItemText>()
                 for (line in result.matchLines) {
-                    texts.add(SearchItemText(line.line, line.page))
+                    texts.add(SearchItemText(line.line, line.page-1))
                 }
                 if (texts.size > 0) {
                     searchItems.add(SearchItem(result.itemName, texts))
@@ -59,12 +60,12 @@ class SearchActivity : Activity() {
             }
 
             searchAdapter.notifyDataSetChanged()
-            lvSearchItems.invalidate()
 
         }
     }
 
     inner class ItemsAdapter(context: Context, itemList: ArrayList<SearchItem>): BaseAdapter() {
+        var ctx = context
         var items = itemList
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -83,10 +84,12 @@ class SearchActivity : Activity() {
 
             vh.itemName.text = items[position].itemName
             vh.text1.text = items[position].texts[0].itemName
+            vh.page1 = items[position].texts[0].page
 
             if(items[position].texts.size >= 2) {
                 vh.text2.visibility = View.VISIBLE
                 vh.text2.text = items[position].texts[1].itemName
+                vh.page2 = items[position].texts[1].page
             }
             else {
                 vh.text2.visibility = View.GONE
@@ -95,10 +98,13 @@ class SearchActivity : Activity() {
             if(items[position].texts.size >= 3) {
                 vh.text2.visibility = View.VISIBLE
                 vh.text3.text = items[position].texts[2].itemName
+                vh.page3 = items[position].texts[2].page
             }
             else {
                 vh.text3.visibility = View.GONE
             }
+
+            vh.setListeners(ctx)
 
             return view
         }
@@ -113,12 +119,41 @@ class SearchActivity : Activity() {
         val text1: TextView
         val text2: TextView
         val text3: TextView
+        var page1: Int = 0
+        var page2: Int = 0
+        var page3: Int = 0
 
         init {
             this.itemName = view?.findViewById(R.id.searchResultItem) as TextView
             this.text1 = view?.findViewById(R.id.searchResultText1) as TextView
             this.text2 = view?.findViewById(R.id.searchResultText2) as TextView
             this.text3 = view?.findViewById(R.id.searchResultText3) as TextView
+        }
+
+        fun setListeners(context: Context) {
+            text1.setOnClickListener { v ->
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                val intent = Intent(context, PDFActivity::class.java)
+                intent.putExtra("pdfName", itemName.text)
+                intent.putExtra("pdfPage", page1)
+                context.startActivity(intent)
+            }
+
+            text2.setOnClickListener { v ->
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                val intent = Intent(context, PDFActivity::class.java)
+                intent.putExtra("pdfName", itemName.text)
+                intent.putExtra("pdfPage", page2)
+                context.startActivity(intent)
+            }
+
+            text3.setOnClickListener { v ->
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                val intent = Intent(context, PDFActivity::class.java)
+                intent.putExtra("pdfName", itemName.text)
+                intent.putExtra("pdfPage", page3)
+                context.startActivity(intent)
+            }
         }
     }
 
