@@ -133,7 +133,7 @@ class SearchActivity : Activity() {
         fun setListeners(context: Context) {
             text1.setOnClickListener { v ->
                 v.parent.requestDisallowInterceptTouchEvent(true)
-                val intent = Intent(context, PDFActivity::class.java)
+                val intent = Intent(context, PDF2Activity::class.java)
                 intent.putExtra("pdfName", itemName.text)
                 intent.putExtra("pdfPage", page1)
                 context.startActivity(intent)
@@ -141,7 +141,7 @@ class SearchActivity : Activity() {
 
             text2.setOnClickListener { v ->
                 v.parent.requestDisallowInterceptTouchEvent(true)
-                val intent = Intent(context, PDFActivity::class.java)
+                val intent = Intent(context, PDF2Activity::class.java)
                 intent.putExtra("pdfName", itemName.text)
                 intent.putExtra("pdfPage", page2)
                 context.startActivity(intent)
@@ -149,7 +149,7 @@ class SearchActivity : Activity() {
 
             text3.setOnClickListener { v ->
                 v.parent.requestDisallowInterceptTouchEvent(true)
-                val intent = Intent(context, PDFActivity::class.java)
+                val intent = Intent(context, PDF2Activity::class.java)
                 intent.putExtra("pdfName", itemName.text)
                 intent.putExtra("pdfPage", page3)
                 context.startActivity(intent)
