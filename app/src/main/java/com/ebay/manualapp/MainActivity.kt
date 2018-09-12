@@ -89,6 +89,7 @@ class MainActivity : Activity(), Observer {
                 vh = view.tag as ViewHolder
             }
 
+            vh.imgBackground.setImageResource(R.drawable.main_list_background)
             vh.imgItem.setImageResource(items[position].img)
             vh.tvItemName.text = items[position].name
             vh.tvRemain.text = "-" + items[position].remain.toString() + "일"
@@ -134,6 +135,7 @@ class MainActivity : Activity(), Observer {
     }
 
     private class ViewHolder(view: View) {
+        val imgBackground: ImageView
         val imgItem: ImageView
         val imgRemain: ImageView
         val tvItemName: TextView
@@ -145,6 +147,7 @@ class MainActivity : Activity(), Observer {
         var sup3 = ""
 
         init {
+            this.imgBackground = view.findViewById(R.id.imgListItemBackground) as ImageView
             this.imgItem = view.findViewById(R.id.imgItem) as ImageView
             this.imgRemain = view.findViewById(R.id.imgRemain) as ImageView
             this.tvItemName= view.findViewById(R.id.tvItemName) as TextView
