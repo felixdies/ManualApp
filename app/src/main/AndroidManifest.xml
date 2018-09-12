@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -13,23 +13,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".DetailActivity" />
+        <activity android:name=".PDFActivity" />
+
+        <receiver android:name=".SMSReceiver">
+            <intent-filter>
+
+                <!-- 문자를 받아올 수 있게 intent-filter 추가 -->
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".PDFActivity"></activity>
-
-        <receiver android:name=".SMSReceiver">
-            <intent-filter >
-                <!-- 문자를 받아올 수 있게 intent-filter 추가 -->
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>
