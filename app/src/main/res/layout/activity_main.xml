@@ -45,6 +45,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
+                    android:id="@+id/imgAddBtn"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="260dp"
+                    android:layout_marginTop="34dp"
+                    android:src="@drawable/add_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -99,16 +109,6 @@
                     android:textColor="#888888"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="@+id/vSearch"
-                    app:layout_constraintTop_toTopOf="@+id/vSearch" />
-
-                <ImageView
-                    android:id="@+id/imgBarcode"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/bacode"
-                    app:layout_constraintEnd_toEndOf="@+id/vSearch"
                     app:layout_constraintTop_toTopOf="@+id/vSearch" />
 
                 <TextView

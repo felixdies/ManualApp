@@ -13,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchActivity" />
         <activity android:name=".PDFActivity" />
+        <activity android:name=".PDF2Activity" />
         <activity android:name=".DetailActivity" />
+
 
         <receiver android:name=".SMSReceiver">
             <intent-filter>
@@ -31,9 +32,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".PDF2Activity"></activity>
+
+        <activity android:name=".SearchActivity">
+
+        </activity>
+
+        <activity android:name=".LoginActivity">
+        </activity>
     </application>
 
 </manifest>
