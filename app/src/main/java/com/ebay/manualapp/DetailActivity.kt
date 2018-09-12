@@ -26,6 +26,6 @@ class DetailActivity : Activity() {
     }
 
     fun makeAuctionUri(itemNo: String): Uri {
-        return Uri.parse("http://mitem.auction.co.kr/vip?itemno=" + itemNo)
+        return Uri.parse("http://gmkt.kr/" + itemNo)
     }
 }
