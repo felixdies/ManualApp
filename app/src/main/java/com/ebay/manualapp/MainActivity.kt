@@ -29,7 +29,7 @@ class MainActivity : Activity(), Observer {
         ObservableObject.instance.addObserver(this)
 
         // ListView 가 ScrollView 와 함께 Scroll 되도록 함
-        lvItems.setOnTouchListener { v, event ->
+        lvItems.setOnTouchListener { v, _ ->
             v.parent.requestDisallowInterceptTouchEvent(false)
             return@setOnTouchListener false
         }
@@ -133,7 +133,7 @@ class MainActivity : Activity(), Observer {
         override fun getCount(): Int = items.size
     }
 
-    private class ViewHolder(view: View?) {
+    private class ViewHolder(view: View) {
         val imgItem: ImageView
         val imgRemain: ImageView
         val tvItemName: TextView
@@ -145,11 +145,11 @@ class MainActivity : Activity(), Observer {
         var sup3 = ""
 
         init {
-            this.imgItem = view?.findViewById(R.id.imgItem) as ImageView
-            this.imgRemain = view?.findViewById(R.id.imgRemain) as ImageView
-            this.tvItemName= view?.findViewById(R.id.tvItemName) as TextView
-            this.tvRemain= view?.findViewById(R.id.tvRemain) as TextView
-            this.ivPdf = view?.findViewById(R.id.ivPdf) as ImageView
+            this.imgItem = view.findViewById(R.id.imgItem) as ImageView
+            this.imgRemain = view.findViewById(R.id.imgRemain) as ImageView
+            this.tvItemName= view.findViewById(R.id.tvItemName) as TextView
+            this.tvRemain= view.findViewById(R.id.tvRemain) as TextView
+            this.ivPdf = view.findViewById(R.id.ivPdf) as ImageView
 
             ivPdf.setImageResource(R.drawable.pdficon)
         }
