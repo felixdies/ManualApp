@@ -13,16 +13,19 @@ import android.animation.ValueAnimator
 class DetailActivity : Activity() {
     var bitmap = Bitmap.createBitmap(176, 176, Bitmap.Config.ARGB_8888)
     var canvas = Canvas(bitmap)
+    var cpaint = Paint(Paint.ANTI_ALIAS_FLAG)
     var paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
+        cpaint.color = Color.WHITE
+        cpaint.style = Paint.Style.STROKE
+        canvas.drawCircle(88f, 88f, 86f, cpaint)
+
         paint.color = Color.WHITE
         paint.style = Paint.Style.STROKE
-        canvas.drawCircle(88f, 88f, 86f, paint)
-
         paint.strokeWidth = 4f
         canvas.drawArc(2f, 2f, 174f, 174f, -90f, 360f * 0.12f, false, paint)
 
@@ -47,6 +50,7 @@ class DetailActivity : Activity() {
             val ival = animation.animatedValue
             if (ival is Int) {
                 bitmap.eraseColor(Color.TRANSPARENT)
+                canvas.drawCircle(88f, 88f, 86f, cpaint)
                 canvas.drawArc(2f, 2f, 174f, 174f, -90f, 360f * (ival.toFloat() / 100f), false, paint)
             }
         }
