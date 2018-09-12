@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SearchActivity" />
         <activity android:name=".PDFActivity" />
+        <activity android:name=".DetailActivity" />
 
         <receiver android:name=".SMSReceiver">
             <intent-filter>
@@ -30,10 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity" >
-        </activity>
         <activity android:name=".LoginActivity">
-
         </activity>
     </application>
 
