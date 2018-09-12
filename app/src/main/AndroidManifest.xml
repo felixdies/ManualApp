@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SearchActivity" />
-        <activity android:name=".DetailActivity" />
         <activity android:name=".PDFActivity" />
 
         <receiver android:name=".SMSReceiver">
@@ -30,6 +29,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".DetailActivity" >
         </activity>
         <activity android:name=".LoginActivity">
 
