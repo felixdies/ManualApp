@@ -38,13 +38,11 @@ class PDFActivity : Activity() {
     private fun openPDF(page: Int) {
         val file = File(pdfPath)
 
-        var fileDescriptor: ParcelFileDescriptor? = null
-        fileDescriptor = ParcelFileDescriptor.open(
+        var fileDescriptor = ParcelFileDescriptor.open(
                 file, ParcelFileDescriptor.MODE_READ_ONLY)
 
         //min. API Level 21
-        var pdfRenderer: PdfRenderer? = null
-        pdfRenderer = PdfRenderer(fileDescriptor!!)
+        var pdfRenderer = PdfRenderer(fileDescriptor!!)
 
         val pageCount = pdfRenderer.pageCount
         Toast.makeText(this,
