@@ -3,10 +3,7 @@ package com.ebay.manualapp
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -44,7 +41,7 @@ class MainActivity : Activity(), Observer {
         }
 
         // 역순으로 추가됨
-        addItemList(Item("삼성 빌트인 냉장고\nHX6711", "삼성 빌트인 냉장고 HX6711", "", "", "", R.drawable.item3, 143, 0.5f))
+        addItemList(Item("삼성 빌트인 냉장고\nHX6711", "삼성 빌트인 냉장고 HX6711", "", "", "", R.drawable.item3, 143, 0.4f))
         addItemList(Item("삼성 레이저프린터\nSL-M2027", "삼성 레이저프린터 SL-M2027", "", "", "", R.drawable.item4, 200, 0.87f))
         addItemList(Item("삼성 블루스카이\n공기청정기", "삼성 블루스카이 공기청정기", "gBBys6b", "gBM6NNs", "B531060785", R.drawable.item2, 225, 0.12f))
 
@@ -106,25 +103,25 @@ class MainActivity : Activity(), Observer {
         }
 
         fun drawArc(view: ImageView, supplyRemain: Float) {
-            var bitmap = Bitmap.createBitmap(105, 105, Bitmap.Config.ARGB_8888)
+            var bitmap = Bitmap.createBitmap(108, 108, Bitmap.Config.ARGB_8888)
             var canvas = Canvas(bitmap)
-            var paint = Paint()
+            var paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
             paint.setARGB(0xff, 0xe9, 0xe9,0xe9)
             paint.style = Paint.Style.STROKE
-            canvas.drawCircle(52.5f, 52.5f, 51.5f, paint)
+            canvas.drawCircle(54f, 54f, 53f, paint)
 
             if(supplyRemain < 0.25f) {
                 paint.setARGB(0xff, 0xfc, 0x3c,0x59)
             }
             else if(supplyRemain < 0.5f) {
-                paint.color = Color.YELLOW
+                paint.setARGB(0xff, 0xf9, 0xa6,0x02)
             }
             else {
-                paint.color = Color.GREEN
+                paint.setARGB(0xff, 0x69, 0xc9,0x00)
             }
-            paint.strokeWidth = 2f
-            canvas.drawArc(2f, 2f, 103f, 103f, -90f, 360f * supplyRemain, false, paint)
+            paint.strokeWidth = 1.2f
+            canvas.drawArc(1f, 1f, 107f, 107f, -90f, 360f * supplyRemain, false, paint)
 
             view.setImageBitmap(bitmap)
         }

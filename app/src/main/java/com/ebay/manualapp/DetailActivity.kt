@@ -15,7 +15,7 @@ class DetailActivity : Activity() {
 
         var bitmap = Bitmap.createBitmap(176, 176, Bitmap.Config.ARGB_8888)
         var canvas = Canvas(bitmap)
-        var paint = Paint()
+        var paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
         paint.color = Color.WHITE
         paint.style = Paint.Style.STROKE
