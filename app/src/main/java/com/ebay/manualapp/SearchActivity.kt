@@ -59,6 +59,8 @@ class SearchActivity : Activity() {
             }
 
             searchAdapter.notifyDataSetChanged()
+            lvSearchItems.invalidate()
+
         }
     }
 
@@ -81,10 +83,22 @@ class SearchActivity : Activity() {
 
             vh.itemName.text = items[position].itemName
             vh.text1.text = items[position].texts[0].itemName
-            if(items[position].texts.size >= 2) vh.text2.text = items[position].texts[1].itemName
-            else vh.text2.visibility = View.GONE
-            if(items[position].texts.size >= 3) vh.text3.text = items[position].texts[2].itemName
-            else vh.text3.visibility = View.GONE
+
+            if(items[position].texts.size >= 2) {
+                vh.text2.visibility = View.VISIBLE
+                vh.text2.text = items[position].texts[1].itemName
+            }
+            else {
+                vh.text2.visibility = View.GONE
+            }
+
+            if(items[position].texts.size >= 3) {
+                vh.text2.visibility = View.VISIBLE
+                vh.text3.text = items[position].texts[2].itemName
+            }
+            else {
+                vh.text3.visibility = View.GONE
+            }
 
             return view
         }
