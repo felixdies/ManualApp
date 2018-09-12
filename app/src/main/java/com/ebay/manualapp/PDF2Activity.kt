@@ -1,12 +1,13 @@
 package com.ebay.manualapp
 
+import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import kotlinx.android.synthetic.main.activity_pdf2.*
 import java.io.File
 
-class PDF2Activity : AppCompatActivity() {
+class PDF2Activity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
