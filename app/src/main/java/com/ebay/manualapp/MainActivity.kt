@@ -31,6 +31,16 @@ class MainActivity : Activity(), Observer {
             return@setOnTouchListener false
         }
 
+        imgAddBtn.setOnClickListener {
+            imgDim.visibility = View.VISIBLE
+            imgAdd.visibility = View.VISIBLE
+        }
+
+        imgAdd.setOnClickListener {
+            imgDim.visibility = View.GONE
+            imgAdd.visibility = View.GONE
+        }
+
         tvSearch.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
